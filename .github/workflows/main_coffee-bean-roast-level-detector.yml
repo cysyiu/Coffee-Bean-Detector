@@ -2,7 +2,7 @@
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 # More info on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
 
-name: Deploy Backend to Azure Web App - coffeebeanroastleveldetector
+name: Deploy Backend to Azure Web App - Coffee-Bean-Roast-Level-Detector
 
 on:
   push:
@@ -73,5 +73,5 @@ jobs:
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'coffeebeanroastleveldetector' # Matches Azure Web App name
+          app-name: 'Coffee-Bean-Roast-Level-Detector' # Matches Azure Web App name
           slot-name: 'Production'
