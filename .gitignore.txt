@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+*.egg-info/
+dist/
+build/
+
+# YOLOv5
+yolov5/runs/
+yolov5/*.pt  # Exclude other .pt files, but keep best.pt in backend/
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
