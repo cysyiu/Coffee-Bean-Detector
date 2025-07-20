@@ -26,26 +26,22 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Create and start virtual environment
-        run: |
-          python -m venv venv
-          source venv/bin/activate
-      
       - name: Install dependencies
-        run: pip install -r requirements.txt
-        
-      # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
+        run: |
+          cd backend
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
+        run: |
+          cd backend
+          zip -r ../release.zip .
 
-      - name: Upload artifact for deployment jobs
+      - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: python-app
-          path: |
-            release.zip
-            !venv/
+          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -63,18 +59,10 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
 
-      
-      - name: Login to Azure
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_B933DF00DB884C7383649870A911BB63 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_62434904970240718A02319B41A3BC4A }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_BDAFA5E0452C4EB68C1D6B5437B471C9 }}
-
-      - name: 'Deploy to Azure Web App'
+      - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
-        id: deploy-to-webapp
         with:
-          app-name: 'Coffee-Bean-Roast-Level-Detector'
+          app-name: 'Coffee-Bean-Roast-Level-Detector' # Matches Azure Web App name
           slot-name: 'Production'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }} # Uses publish profile secret
           
