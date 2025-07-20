@@ -59,10 +59,17 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
 
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_B933DF00DB884C7383649870A911BB63 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_62434904970240718A02319B41A3BC4A }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_BDAFA5E0452C4EB68C1D6B5437B471C9 }}
+    
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'Coffee-Bean-Roast-Level-Detector' # Matches Azure Web App name
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }} # Uses publish profile secret
+        
           
