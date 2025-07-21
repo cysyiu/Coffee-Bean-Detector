@@ -1,5 +1,5 @@
 import torch
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, File, UploadFile, Response
 from fastapi.middleware.cors import CORSMiddleware
 from PIL import Image
 import io
@@ -13,7 +13,7 @@ app = FastAPI(
 )
 
 # Allow CORS for frontend access
-origins = ["*"]  # Update with your frontend URL in production
+origins = ["https://cysyiu.github.io"]  # Update with your frontend URL in production
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -23,7 +23,7 @@ app.add_middleware(
 )
 
 # Load YOLOv5 model
-model = torch.hub.load('./yolov5', 'custom', path='./best.pt', source='local')
+model = torch.hub.load('/home/site/wwwroot/backend/yolov5', 'custom', path='/home/site/wwwroot/backend/best.pt', source='local')
 model.conf = 0.5  # Confidence threshold
 
 # Health check endpoint
