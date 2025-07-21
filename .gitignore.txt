@@ -11,8 +11,16 @@ dist/
 build/
 
 # YOLOv5
-yolov5/runs/
-yolov5/*.pt  # Exclude other .pt files, but keep best.pt in backend/
+backend/yolov5/runs/
+backend/yolov5/*.pt
+
+# Explicitly include necessary YOLOv5 files
+!backend/yolov5/hubconf.py
+!backend/yolov5/models/
+!backend/yolov5/utils/
+
+# Keep backend/best.pt
+!backend/best.pt
 
 # IDE and OS files
 .vscode/
