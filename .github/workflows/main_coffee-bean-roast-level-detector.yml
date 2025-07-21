@@ -33,7 +33,8 @@ jobs:
       - name: Verify requirements file
         run: |
           ls -l backend/requirements.txt
-          ls -l backend/yolov5/requirements.txt || echo "yolov5/requirements.txt not found"
+          echo "Checking backend/requirements.txt contents:"
+          cat backend/requirements.txt
 
       - name: Install dependencies
         run: |
