@@ -25,6 +25,11 @@ jobs:
           fetch-depth: 1 # Shallow clone for faster checkout
           submodules: false # Disable submodules unless yolov5/ is a submodule
 
+      - name: Verify yolov5 directory
+        run: |
+          ls -la backend/yolov5 || echo "backend/yolov5 not found"
+          if [ -d "backend/yolov5/.git" ]; then echo "Error: .git directory found in backend/yolov5"; exit 1; fi
+
       - name: Set up Python version
         uses: actions/setup-python@v5
         with:
