@@ -16,7 +16,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: read # Required for actions/checkout
+      contents: read # Required for actions/checkou
 
     steps:
       - name: Checkout repository
@@ -29,6 +29,11 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.10' # Matches Azure Web App runtime (PYTHON|3.8)
+
+      - name: Verify requirements file
+        run: |
+          ls -l backend/requirements.txt
+          ls -l backend/yolov5/requirements.txt || echo "yolov5/requirements.txt not found"
 
       - name: Install dependencies
         run: |
